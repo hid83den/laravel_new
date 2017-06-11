@@ -11,7 +11,7 @@
 |
 /*
  * Route - фасад, который возвращает объект класса Router*/
-
+/* web.php was changed to test git */
 Route::get('/', function () {   // Контроллер отсутсвует - значит данные сразу передаются во
     return view('welcome');// View
 });
