@@ -42,19 +42,22 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 /**************************** Routes with params *************************/
 //Route::get('/modname/{id}/{cat?}', function ($id, $cat = null) {//params order by template
-Route::get('/modname/id/{id}/cat/{cat}', function ($id, $cat) {
+Route::get('/modname/id/{id}/cat/{cat?}', function ($id, $cat = 1) { // ? - не обязательный параметр
+                                                // $id, $cat по порядку
 //Route::get('/modname/id/{id}/{cat?}', function ($id, $cat = null) {
     echo $id.' - '.$cat;
 })->where(['id' =>'[0-9]+', 'cat' => '[A-Za-z]+']);  // where - regexp (array) filter
+                                                // $id, $cat по имени
 /*********************** Groups *******************/
-Route::group(['prefix' => 'adm'], function () {
+// Route::group(['prefix' => 'adm/{id}'], function () {
+Route::group(['prefix' => 'adm'], function () { // prefix - префикс группы
     Route::get('/user/create', function () {
         echo 'xcvxcvxcvxcv';
         redirect()->route('postedit');
     });
-    Route::get('/post/edit', ['as' => 'postedit', function () {
-        echo route('postedit');
-    }]);
+    Route::get('/post/edit', ['as' => 'postedit', function () { // as - имя текущего роутера
+        echo route('postedit'); // имя роутера - 1-й параметр методов route() и
+    }]);                              // redirect()->route
 });
 /*********** Routes names ***********/
 Route::get('/user/create/id/{id}', function ($id) {
